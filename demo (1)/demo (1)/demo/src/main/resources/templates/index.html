@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+    <head>
+        <title>
+        Lista de Eventos
+        </title>
+    </head>
+
+    <style>
+
+    </style>
+<body>
+<div class="container">
+    <h1>Lista de Eventos</h1>
+    <li><a href="/cadastrarEvento" class="waves-effect waves-light btn"><i class="material-icons left"></i>Cadastrar evento</a></li>
+    <div th:if="${mensagem}" class="card-panel teal lighten-2">
+        <span class="white-text" th:text="${mensagem}"></span>
+    </div>
+
+    <table class="striped">
+        <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Local</th>
+            <th>Data</th>
+            <th>Horário</th>
+            <th>Ações</th>
+            <th>Editar</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="evento : ${evento}">
+            <td th:text="${evento.nome}"></td>
+            <td th:text="${evento.local}"></td>
+            <td th:text="${evento.data}"></td>
+            <td th:text="${evento.horario}"></td>
+            <td>
+                <a th:href="@{/deletarEvento(codigo=${evento.codigo})}" class="btn red">Deletar</a>
+            </td>
+            <td>
+                <a th:href="@{/alterarDados(codigo=${evento.codigo})}" class="btn red">Atualizar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div id="modalEditar" class="modal">
+        <div class="modal-content">
+            <h4>Editar Evento</h4>
+            <form th:action="@{/AlterarDados}" method="post">
+                <input type="hidden" name="codigo" id="eventoCodigo">
+                <div class="input-field">
+                    <input type="text" name="nome" id="eventoNome" required />
+                    <label for="eventoNome">Nome</label>
+                </div>
+                <div class="input-field">
+                    <input type="text" name="local" id="eventoData" required />
+                    <label for="eventoLocal">Data </label>
+                </div>
+                <div class="input-field">
+                    <input type="text" name="local" id="eventohorario" required />
+                    <label for="eventoLocal">Horário </label>
+                </div>
+                <div class="input-field">
+                    <input type="text" name="local" id="eventoLocal" required />
+                    <label for="eventoLocal">Local </label>
+                </div>
+                <button type="submit" class="btn">Atualizar</button>
+                <a href="#!" class="modal-close btn red">Cancelar</a>
+
+        </form>
+        </div>
+
+    </div>
+
+
+
+</div>
+</body>
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Eventos</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+</head>
+</html>
